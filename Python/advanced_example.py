@@ -4,14 +4,17 @@ import numpy
 import sys
 
 # Import sensor data
-data = numpy.genfromtxt("sensor_data.csv", delimiter=",", skip_header=1)
+# data = numpy.genfromtxt("sensor_data.csv", delimiter=",", skip_header=1)
+# log-2022-11-22-19-10-31Arm Flex and fist OpenClose.csv
+data = numpy.genfromtxt("log-2022-11-22-19-10-31Arm Flex and fist OpenClose.csv", delimiter=",", skip_header=1)
+# sample_rate = 100  # 100 Hz
+sample_rate = 50  # 50 Hz
 
-sample_rate = 100  # 100 Hz
-
-timestamp = data[:, 0]
-gyroscope = data[:, 1:4]
-accelerometer = data[:, 4:7]
-magnetometer = data[:, 7:10]
+timestamp = data[:, 0] /8192
+print ("timestamp: ", timestamp)
+gyroscope = data[:, 10:13]
+accelerometer = data[:, 7:10]
+magnetometer = data[:, 20:23]
 
 # Instantiate algorithms
 offset = imufusion.Offset(sample_rate)
